@@ -20,8 +20,12 @@
     "@angular/platform-browser": "~12.2.0",
     "@angular/platform-browser-dynamic": "~12.2.0",
     "@angular/router": "~12.2.0",
+    "@auth0/angular-jwt": "^5.0.2",
+    "@auth0/auth0-angular": "^1.8.2",
+    "angular-jwt": "^0.1.11",
     "bootstrap": "^5.1.1",
     "lodash": "^4.17.21",
+    "ngx-markdown": "^13.1.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

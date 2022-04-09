@@ -1,11 +1,11 @@
 import {NgModule} from '@angular/core';
-import {PostListModule} from "./list/PostListModule";
-import {PostService} from "./services/PostService";
-import {PostResource} from "./services/PostResource";
-import {CreatePostDialogComponent} from "./dialogs/CreatePostDialogComponent";
+import {PostListModule} from "./post-list/PostListModule";
 import {CommonMaterialModules} from "../../common/material/CommonMaterialModules";
 import {FormsModule} from "@angular/forms";
 import {CommonModule} from "@angular/common";
+import {PostsService} from "./services/posts.service";
+import {SinglePostModule} from "./single-post/SinglePostModule";
+import {CreatePostDialogComponent} from "./dialogs/create-post-dialog-component";
 
 
 
@@ -15,20 +15,16 @@ import {CommonModule} from "@angular/common";
         PostListModule,
         CommonMaterialModules,
         FormsModule,
-        CommonModule
+        CommonModule,
+        SinglePostModule
     ],
     exports: [
         PostListModule
     ],
-    declarations: [
-        CreatePostDialogComponent
-    ],
-    entryComponents: [
-        CreatePostDialogComponent
-    ],
+    declarations: [CreatePostDialogComponent],
+    entryComponents: [CreatePostDialogComponent],
     providers: [
-    PostService,
-    PostResource
+    PostsService
     ],
 })
 export class PostsModule {

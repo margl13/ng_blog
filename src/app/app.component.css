@@ -1,6 +1,13 @@
+.example-icon {
+    padding: 0 14px;
+}
 
-.w-100 {
-    width: 100%;
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+.home-link:hover {
+    cursor: pointer;
 }
 
 

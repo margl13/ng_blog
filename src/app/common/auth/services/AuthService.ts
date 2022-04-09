@@ -1,52 +1,58 @@
 import {Injectable} from '@angular/core';
 import {UserLogin} from "../../user/dataModel/UserLogin";
-import {Observable} from "rxjs";
-import {AuthResource} from "./AuthResource";
-import {AuthToken} from "../dataModel/AuthToken";
-import {catchError, map, tap} from "rxjs/operators";
-import {Router} from "@angular/router";
-import * as _ from "lodash";
+import {map, switchMap, tap} from "rxjs/operators";
+import {HttpClient} from "@angular/common/http";
+import {UserRegister} from "../../user/dataModel/UserRegister";
+import {JwtHelperService} from "@auth0/angular-jwt";
+import {Observable, of} from "rxjs";
 
 
-@Injectable()
+export const AUTH_TOKEN = 'blog-token';
+
+@Injectable({
+    providedIn: "root"
+})
 export class AuthService {
-    private readonly AUTH_STORAGE_KEY = 'auth_token';
-
-    constructor(private readonly resource: AuthResource,
-                private readonly router: Router) {
+    constructor(private http: HttpClient,
+                private jwtHelper: JwtHelperService) {
     }
 
-    public signIn(user: UserLogin): Observable<void> {
-        return this.resource.signInUser(user)
-            .pipe(
-                map((authToken) => {
-                    this.storeToken(authToken);
-                    return;
-                })
-            );
+    login(loginForm: UserLogin) {
+        return this.http.post<any>('/api/users/login', {email: loginForm.email, password: loginForm.password}).pipe(
+            map((token) => {
+                console.log(token);
+                localStorage.setItem(AUTH_TOKEN, token.access_token)
+                return token;
+            })
+        )
     }
 
-    public isAuthorized(): boolean {
-        return !_.isEmpty(this.loadToken());
+    logout() {
+        localStorage.removeItem(AUTH_TOKEN);
     }
 
-    public logout() {
-        this.cleanToken();
-        this.router.navigate(['login']);
-
+    register(user: UserRegister) {
+        return this.http.post<any>('/api/users/', user).pipe(
+            map(user => user)
+        )
     }
 
-    private cleanToken() {
-        localStorage.removeItem(this.AUTH_STORAGE_KEY);
+    isAuthenticated(): boolean {
+        const token = localStorage.getItem(AUTH_TOKEN);
+        return !this.jwtHelper.isTokenExpired(token);
     }
 
-    private storeToken(authToken: AuthToken) {
-        console.log(authToken);
-        localStorage.setItem(this.AUTH_STORAGE_KEY, JSON.stringify(authToken));
-    }
-
-    private loadToken(): AuthToken {
-        return JSON.parse(localStorage.getItem(this.AUTH_STORAGE_KEY)!)
-
+    getUserId(): Observable<any> {
+        return of(localStorage.getItem(AUTH_TOKEN)).pipe(
+            tap((jwt) => console.log(jwt)),
+            switchMap((jwt: any ) => of(this.jwtHelper.decodeToken(jwt)).pipe(
+                map((jwt: any) => jwt.user.id)
+            ))
+        )
     }
 }
+
+
+
+
+

@@ -1,0 +1,43 @@
+<div class="container-fluid mt-5">
+    <div class="row align-content-center d-flex justify-content-center row">
+        <div class="col-4">
+            <mat-card>
+                <mat-card-title>Login Page</mat-card-title>
+                <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                    <mat-card-content>
+                        <div class="row">
+                            <div class="col-12">
+                                <mat-form-field class="w-100">
+                                    <input type="text"
+                                           matInput
+                                           formControlName="email"
+                                           required
+                                           placeholder="email">
+                                    <mat-hint *ngIf="loginForm.controls.email.errors">Email is required</mat-hint>
+                                </mat-form-field>
+
+                            </div>
+                            <div class="col-12">
+                                <mat-form-field class="w-100">
+                                    <input type="password"
+                                           formControlName="password"
+                                           matInput
+                                           required
+                                           placeholder="password">
+                                    <mat-hint *ngIf="loginForm.controls.password.errors">Password is required</mat-hint>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </mat-card-content>
+                    <mat-card-actions class="d-flex justify-content-center">
+                        <button mat-flat-button
+                                color="primary"
+                                [disabled]="isLoading"
+                                class="w-100">Submit</button>
+                    </mat-card-actions>
+                </form>
+                <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+            </mat-card>
+        </div>
+    </div>
+</div>
