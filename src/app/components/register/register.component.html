@@ -1,12 +1,9 @@
-<div class="container-fluid mt-5">
-    <div class="row align-content-center d-flex justify-content-center row">
-        <div class="col-4">
+
             <mat-card>
                 <mat-card-title>Register Page</mat-card-title>
                 <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
                     <mat-card-content>
-                        <div class="row">
-                            <div class="col-12">
+
                                 <mat-form-field class="w-100">
                                     <input type="text"
                                            matInput
@@ -15,8 +12,7 @@
 
 
                                 </mat-form-field>
-                            </div>
-                            <div class="col-12">
+
                                 <mat-form-field class="w-100">
                                     <input type="email"
                                            formControlName="email"
@@ -24,8 +20,7 @@
                                            placeholder="email">
 
                                 </mat-form-field>
-                            </div>
-                            <div class="col-12">
+
                                 <mat-form-field class="w-100">
                                     <input type="password"
                                            formControlName="password"
@@ -33,8 +28,7 @@
                                            placeholder="password">
 
                                 </mat-form-field>
-                            </div>
-                            <div class="col-12">
+
                                 <mat-form-field class="w-100">
                                     <input type="password"
                                             formControlName="passwordConfirm"
@@ -48,8 +42,7 @@
                                     </div>
 
                                 </mat-form-field>
-                            </div>
-                        </div>
+
                     </mat-card-content>
                     <mat-card-actions class="d-flex justify-content-center">
                         <button mat-flat-button
@@ -59,6 +52,3 @@
                     </mat-card-actions>
                 </form>
             </mat-card>
-        </div>
-    </div>
-</div>

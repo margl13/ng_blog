@@ -8,8 +8,6 @@ import {SinglePostModule} from "./single-post/SinglePostModule";
 import {CreatePostDialogComponent} from "./dialogs/create-post-dialog-component";
 
 
-
-
 @NgModule({
     imports: [
         PostListModule,

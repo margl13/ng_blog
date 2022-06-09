@@ -1,7 +1,6 @@
 import {Injectable} from "@angular/core";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable, throwError} from "rxjs";
-import {UserData} from "../dataModel/UserData";
 import {catchError, map} from "rxjs/operators";
 import {UserDto} from "../dataModel/UserDto";
 

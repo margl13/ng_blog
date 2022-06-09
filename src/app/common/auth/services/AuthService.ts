@@ -18,7 +18,7 @@ export class AuthService {
     }
 
     login(loginForm: UserLogin) {
-        return this.http.post<any>('/api/users/login', {email: loginForm.email, password: loginForm.password}).pipe(
+        return this.http.post<any>('/api/auth/login', {email: loginForm.email, password: loginForm.password}).pipe(
             map((token) => {
                 console.log(token);
                 localStorage.setItem(AUTH_TOKEN, token.access_token)
@@ -39,13 +39,20 @@ export class AuthService {
 
     isAuthenticated(): boolean {
         const token = localStorage.getItem(AUTH_TOKEN);
-        return !this.jwtHelper.isTokenExpired(token);
+        if (!token) {
+            return false;
+        }
+        try {
+            return !this.jwtHelper.isTokenExpired(token)
+        } catch (e) {
+            return false
+        }
     }
 
     getUserId(): Observable<any> {
         return of(localStorage.getItem(AUTH_TOKEN)).pipe(
             tap((jwt) => console.log(jwt)),
-            switchMap((jwt: any ) => of(this.jwtHelper.decodeToken(jwt)).pipe(
+            switchMap((jwt: any) => of(this.jwtHelper.decodeToken(jwt)).pipe(
                 map((jwt: any) => jwt.user.id)
             ))
         )

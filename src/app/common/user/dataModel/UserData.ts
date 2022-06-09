@@ -14,4 +14,4 @@ export interface UserData {
         next: string;
         last: string;
     }
-};
+}
