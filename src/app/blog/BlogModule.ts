@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {HttpClientModule} from "@angular/common/http";
 import {PostsModule} from "./posts/PostsModule";
 import {CommonMaterialModules} from "../common/material/CommonMaterialModules";
-import {ConfirmationDialogComponent} from "./dialogs/ConfirmationDialogComponent";
+import {ConfirmationDialogComponent} from "./dialogs/confirmationDialogComponent";
 
 
 @NgModule({

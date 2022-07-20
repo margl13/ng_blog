@@ -35,10 +35,10 @@
                                             matInput
                                             placeholder="Password Confirmation"
                                            class="form-control"
-                                           [ngClass]="{ 'is-invalid': submitted && f.passwordConfirm.errors}">
-                                    <div *ngIf="submitted && f.passwordConfirm.errors" class="invalid-feedback">
-                                        <div *ngIf="f.passwordConfirm.errors.required">Confirm password is required</div>
-                                        <div *ngIf="f.passwordConfirm.errors.mustMatch">Password should be same as Confirm password</div>
+                                           [ngClass]="{ 'is-invalid': submitted && form.passwordConfirm.errors}">
+                                    <div *ngIf="submitted && form.passwordConfirm.errors" class="invalid-feedback">
+                                        <div *ngIf="form.passwordConfirm.errors.required">Confirm password is required</div>
+                                        <div *ngIf="form.passwordConfirm.errors.mustMatch">Password should be same as Confirm password</div>
                                     </div>
 
                                 </mat-form-field>

@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from "rxjs";
 import {UserDto} from "../dataModel/UserDto";
 import {ActivatedRoute} from "@angular/router";
-import {UsersService} from "../users/Users.Service";
+import {UsersService} from "../users/users.Service";
 import {map} from "rxjs/operators";
 
 @Component({

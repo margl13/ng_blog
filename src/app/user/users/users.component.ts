@@ -1,14 +1,14 @@
 import {Component, OnInit} from "@angular/core";
 import {UserData} from "../dataModel/UserData";
-import {UsersService} from "./Users.Service";
+import {UsersService} from "./users.Service";
 import {map, tap} from "rxjs/operators";
 import {PageEvent} from "@angular/material/paginator";
 import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
     selector: 'app-users',
-    templateUrl: './Users.component.html',
-    styleUrls: ['./Users.component.scss']
+    templateUrl: './users.component.html',
+    styleUrls: ['./users.component.scss']
 })
 
 export class UsersComponent implements OnInit {

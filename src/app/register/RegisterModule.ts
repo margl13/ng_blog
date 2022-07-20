@@ -1,8 +1,8 @@
-import {NgModule} from '@angular/core';
-import {LoginComponent} from './LoginComponent';
+import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
-import {CommonMaterialModules} from "../../common/material/CommonMaterialModules";
+import {CommonMaterialModules} from "../common/material/CommonMaterialModules";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {RegisterComponent} from "./register.component";
 
 
 @NgModule({
@@ -13,8 +13,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
         ReactiveFormsModule
     ],
     exports: [],
-    declarations: [LoginComponent],
+    declarations: [RegisterComponent],
     providers: [],
 })
-export class LoginModule {
+export class RegisterModule {
 }

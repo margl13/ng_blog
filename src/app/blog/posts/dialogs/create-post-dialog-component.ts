@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from "@angular/core";
-import {CreatePostDto} from "../dataModel/createPostDto";
+import {CreatePostDto} from "../dataModel/CreatePostDto";
 import {EditPostDto} from "../dataModel/EditPostDto";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {PostsService} from "../services/posts.service";

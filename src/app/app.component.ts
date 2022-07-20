@@ -1,6 +1,6 @@
 import {Component, ViewEncapsulation} from '@angular/core';
 import {Router} from "@angular/router";
-import {AuthService} from "./common/auth/services/AuthService";
+import {AuthService} from "./common/auth/services/authService";
 
 @Component({
   selector: 'app-root',

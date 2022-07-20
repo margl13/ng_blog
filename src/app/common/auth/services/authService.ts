@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {UserLogin} from "../../user/dataModel/UserLogin";
+import {UserLogin} from "../../../user/dataModel/UserLogin";
 import {map, switchMap, tap} from "rxjs/operators";
 import {HttpClient} from "@angular/common/http";
-import {UserRegister} from "../../user/dataModel/UserRegister";
+import {UserRegister} from "../../../user/dataModel/UserRegister";
 import {JwtHelperService} from "@auth0/angular-jwt";
 import {Observable, of} from "rxjs";
 

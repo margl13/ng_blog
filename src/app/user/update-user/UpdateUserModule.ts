@@ -1,20 +1,17 @@
 import {NgModule} from "@angular/core";
-import {CommonModule} from "@angular/common";
+import {UpdateUserComponent} from "./update-user.component";
 import {CommonMaterialModules} from "../../common/material/CommonMaterialModules";
+import {CommonModule} from "@angular/common";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {RegisterComponent} from "./register.component";
-
 
 @NgModule({
-    imports: [
-        CommonModule,
+    imports: [CommonModule,
         CommonMaterialModules,
         FormsModule,
-        ReactiveFormsModule
-    ],
-    exports: [],
-    declarations: [RegisterComponent],
+        ReactiveFormsModule],
+    exports: [UpdateUserComponent],
+    declarations: [UpdateUserComponent],
     providers: [],
 })
-export class RegisterModule {
+export class UpdateUserModule {
 }

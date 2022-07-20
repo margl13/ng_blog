@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {AuthService} from "./services/AuthService";
+import {AuthService} from "./services/authService";
 import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({

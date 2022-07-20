@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {AuthService} from "../../auth/services/AuthService";
-import {UsersService} from "../users/Users.Service";
+import {AuthService} from "../../common/auth/services/authService";
+import {UsersService} from "../users/users.Service";
 import {switchMap, tap} from "rxjs/operators";
 import {UserDto} from "../dataModel/UserDto";
 

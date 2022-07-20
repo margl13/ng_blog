@@ -1,14 +1,16 @@
-import {CreatePostDialogComponent} from "../dialogs/create-post-dialog-component";
-import {PostDto} from "../dataModel/PostDto";
-import {Component, OnInit} from "@angular/core";
-import {BehaviorSubject, Observable, ReplaySubject} from "rxjs";
-import {PostsService} from "../services/posts.service";
+import {Component, OnDestroy, OnInit} from "@angular/core";
+import {BehaviorSubject, Observable, Subscription} from "rxjs";
+import {finalize} from "rxjs/operators";
+import * as _ from "lodash";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatDialog} from "@angular/material/dialog";
-import {finalize} from "rxjs/operators";
+
+import {CreatePostDialogComponent} from "../dialogs/create-post-dialog-component";
+import {PostDto} from "../dataModel/PostDto";
+import {PostsService} from "../services/posts.service";
 import {EditPostDto} from "../dataModel/EditPostDto";
-import {ConfirmationDialogComponent} from "../../dialogs/ConfirmationDialogComponent";
-import * as _ from "lodash";
+import {ConfirmationDialogComponent} from "../../dialogs/confirmationDialogComponent";
+
 
 @Component({
     selector: 'app-post-list',
@@ -93,4 +95,6 @@ export class PostListComponent implements OnInit {
             }
         });
     }
+
+
 }

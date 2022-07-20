@@ -1,4 +1,4 @@
-import {UserDto} from "../../../common/user/dataModel/UserDto";
+import {UserDto} from "../../../user/dataModel/UserDto";
 
 export interface EditPostDto {
     id: number;

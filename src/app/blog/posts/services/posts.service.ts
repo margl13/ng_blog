@@ -1,9 +1,8 @@
 import {Injectable} from "@angular/core";
-import {HttpClient, HttpParams} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {PostDto, PostsListPageable} from "../dataModel/PostDto";
-import {tap} from "rxjs/operators";
-import {CreatePostDto} from "../dataModel/createPostDto";
+import {PostDto} from "../dataModel/PostDto";
+import {CreatePostDto} from "../dataModel/CreatePostDto";
 import {EditPostDto} from "../dataModel/EditPostDto";
 
 @Injectable({

@@ -1,8 +1,8 @@
 import {NgModule} from '@angular/core';
-import {UsersComponent} from "./Users.component";
+import {UsersComponent} from "./users.component";
 import {HttpClientModule} from "@angular/common/http";
 import {RouterModule} from "@angular/router";
-import {CommonMaterialModules} from "../../material/CommonMaterialModules";
+import {CommonMaterialModules} from "../../common/material/CommonMaterialModules";
 import {CommonModule} from "@angular/common";
 
 @NgModule({

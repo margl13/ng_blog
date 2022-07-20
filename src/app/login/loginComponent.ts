@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {UserLogin} from "../../common/user/dataModel/UserLogin";
+import {UserLogin} from "../user/dataModel/UserLogin";
 import {FormBuilder, FormControl, FormGroup, NgForm, Validators} from "@angular/forms";
-import {AuthService} from "../../common/auth/services/AuthService";
+import {AuthService} from "../common/auth/services/authService";
 import {finalize, map} from "rxjs/operators";
 import {Router} from "@angular/router";
 
