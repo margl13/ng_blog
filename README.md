@@ -7,7 +7,7 @@ ______
 * Authentication and Authorization
 * CRUD Operations
 
-##This Projects covers all fundamentals of Angular
+## This Project covers all fundamentals of Angular
 _______
 * Multiple Modules
 * Components, Template and DataBinding
