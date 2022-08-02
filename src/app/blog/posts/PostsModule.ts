@@ -1,11 +1,12 @@
 import {NgModule} from '@angular/core';
 import {PostListModule} from "./post-list/PostListModule";
 import {CommonMaterialModules} from "../../common/material/CommonMaterialModules";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CommonModule} from "@angular/common";
 import {PostsService} from "./services/posts.service";
 import {SinglePostModule} from "./single-post/SinglePostModule";
 import {CreatePostDialogComponent} from "./dialogs/create-post-dialog-component";
+import {MatToolbarModule} from "@angular/material/toolbar";
 
 
 @NgModule({
@@ -13,8 +14,9 @@ import {CreatePostDialogComponent} from "./dialogs/create-post-dialog-component"
         PostListModule,
         CommonMaterialModules,
         FormsModule,
+        ReactiveFormsModule,
         CommonModule,
-        SinglePostModule
+        SinglePostModule,
     ],
     exports: [
         PostListModule

@@ -17,12 +17,8 @@ export class PostsService {
         return this.http.get('/api/posts/') as Observable<PostDto[]>;
     }
 
-    createPost(cretePostDto: CreatePostDto): Observable<PostDto> {
-        return this.http.post('/api/posts/', cretePostDto) as Observable<PostDto>
-    }
-
     findOnePost(id: number): Observable<PostDto>{
-        return this.http.get<PostDto>('/api/posts/' + id)
+        return this.http.get<PostDto>('/api/posts/' + id);
     }
 
     public edit(editPostDto: EditPostDto): Observable<PostDto> {
@@ -31,6 +27,17 @@ export class PostsService {
 
     public delete(postId: number): Observable<any> {
         return this.http.delete('/api/posts/' + '/' + postId);
+    }
+
+    create(createPostDto: CreatePostDto): Observable<PostDto> {
+        return this.http.post('/api/posts/', createPostDto) as Observable<PostDto>;
+    }
+
+    uploadImage(formData: FormData): Observable<any> {
+        return this.http.post<FormData>('/api/posts/image/upload', formData, {
+            reportProgress: true,
+            observe: "events"
+        });
     }
 
 }

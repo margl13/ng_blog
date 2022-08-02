@@ -2,10 +2,12 @@
     <mat-card class="card">
         <mat-card-header>
             <div style="display: flex; flex-direction: row">
+                <div>
+                    <img src="/api/posts/image/{{post.imageUrl}}" class="header-image">
+                </div>
                 <div style="margin-left: 20px;">
                     <h1>{{post.title}}</h1>
                     <h2>{{post.subTitle}}</h2>
-                    <h3>{{post.imageUrl}}</h3>
                     <h3>Author: {{post.author.username}}</h3>
                     <a routerLink="../../users/{{post.author.id}}">Author profile</a>
                 </div>
