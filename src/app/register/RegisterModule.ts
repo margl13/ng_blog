@@ -3,6 +3,7 @@ import {CommonModule} from "@angular/common";
 import {CommonMaterialModules} from "../common/material/CommonMaterialModules";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {RegisterComponent} from "./register.component";
+import {HttpClientModule} from "@angular/common/http";
 
 
 @NgModule({
@@ -10,7 +11,8 @@ import {RegisterComponent} from "./register.component";
         CommonModule,
         CommonMaterialModules,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        HttpClientModule
     ],
     exports: [],
     declarations: [RegisterComponent],

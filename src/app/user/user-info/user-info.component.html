@@ -1,9 +1,17 @@
 <div *ngIf="user" class="main-div">
     <mat-card class="card">
-        <mat-card-title>Username: {{user.username}}</mat-card-title>
-        <mat-card-subtitle>{{user.email}}</mat-card-subtitle>
+        <mat-card-header>
+            <div mat-card-avatar>
+                <img src="/api/users/profile-image/{{user.profileImage}}" class="profile-image">
+            </div>
+            <mat-card-title>Username: {{user.username}}</mat-card-title>
+            <mat-card-subtitle>{{user.email}}</mat-card-subtitle>
+        </mat-card-header>
+
         <mat-card-content>
             <p>Role: {{user.role}}</p>
+            <h3>All posts of {{user.username}}</h3>
         </mat-card-content>
+
     </mat-card>
 </div>

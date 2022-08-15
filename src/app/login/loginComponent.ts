@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit{
         }
         this.authService.login(this.loginForm.value).pipe(
             finalize(() => this.isLoading = false))
-            .subscribe(() => this.router.navigate(['home']))
+            .subscribe(() => this.router.navigate(['admin']))
 
     }
 }

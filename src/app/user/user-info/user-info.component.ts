@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from "rxjs";
 import {UserDto} from "../dataModel/UserDto";
-import {ActivatedRoute} from "@angular/router";
-import {UsersService} from "../users/users.Service";
+import {ActivatedRoute, Router} from "@angular/router";
+import {UsersService} from "../services/users.Service";
 import {map} from "rxjs/operators";
 
 @Component({
@@ -12,13 +12,14 @@ import {map} from "rxjs/operators";
 })
 export class UserInfoComponent implements OnInit, OnDestroy {
 
-    userId: number = null;
-    private sub: Subscription;
-    user: UserDto = null;
+    userId: number = null as any;
+    private sub?: Subscription;
+    user: UserDto = null as any;
 
     constructor(
       private activatedRoute: ActivatedRoute,
-      private usersService: UsersService
+      private usersService: UsersService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -31,6 +32,10 @@ export class UserInfoComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-      this.sub.unsubscribe();
+      this.sub?.unsubscribe();
   }
+
+    navigateTo(value: any) {
+        this.router.navigate(['../', value]);
+    }
 }

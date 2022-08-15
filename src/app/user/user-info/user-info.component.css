@@ -10,3 +10,12 @@
     width: 100%;
     justify-content: center;
 }
+
+.profile-image {
+    background-size: cover;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    object-fit: cover;
+}

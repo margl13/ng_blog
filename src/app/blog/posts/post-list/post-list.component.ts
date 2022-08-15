@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {BehaviorSubject, Observable, Subscription} from "rxjs";
 import {finalize} from "rxjs/operators";
 import * as _ from "lodash";
@@ -19,7 +19,7 @@ import {CreatePostDialogComponent} from "../dialogs/create-post-dialog-component
 
 export class PostListComponent implements OnInit {
     public isLoading = false;
-    public displayedColumns: string[] = ['id', 'title', 'subTitle', 'imageUrl', 'author', 'view post', 'edit post', 'action'];
+    public displayedColumns: string[] = ['id', 'title', 'subTitle', 'imageUrl', 'author', 'view post', 'edit post', 'action', 'add to favorite'];
 
     private postListSubject: BehaviorSubject<PostDto[]> = new BehaviorSubject<PostDto[]>([])
 

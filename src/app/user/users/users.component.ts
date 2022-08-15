@@ -1,7 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {UserData} from "../dataModel/UserData";
-import {UsersService} from "./users.Service";
-import {map, tap} from "rxjs/operators";
+import {UsersService} from "../services/users.Service";
+import {map} from "rxjs/operators";
 import {PageEvent} from "@angular/material/paginator";
 import {ActivatedRoute, Router} from "@angular/router";
 
@@ -13,13 +13,15 @@ import {ActivatedRoute, Router} from "@angular/router";
 
 export class UsersComponent implements OnInit {
 
+    value: string = null as any;
     dataSource: UserData = null as any;
     pageEvent!: PageEvent;
-    displayedColumns: string[] = ['id', 'username', 'email', 'role'];
+    displayedColumns: string[] = ['id', 'username', 'profileImage', 'email', 'role'];
 
     constructor(private userService: UsersService,
-                private route: Router,
-                private activatedRoute: ActivatedRoute) {}
+                private router: Router,
+                private activatedRoute: ActivatedRoute) {
+    }
 
     ngOnInit() {
         this.initDataSource();
@@ -27,7 +29,6 @@ export class UsersComponent implements OnInit {
 
     initDataSource() {
         this.userService.findAll(1, 10).pipe(
-            tap(users => console.log(users)),
             map((userData: UserData) => this.dataSource = userData)
         ).subscribe();
     }
@@ -36,15 +37,29 @@ export class UsersComponent implements OnInit {
         let page = event.pageIndex;
         let size = event.pageSize;
 
-        page = page + 1;
+        if (this.value == null) {
+            page = page + 1;
 
-        this.userService.findAll(page, size).pipe(
-            map((userData: UserData) => this.dataSource = userData)
-        ).subscribe();
+            this.userService.findAll(page, size).pipe(
+                map((userData: UserData) => this.dataSource = userData)
+            ).subscribe();
+        } else {
+            this.userService.paginateByUserName(page, size, this.value).pipe(
+                map((userData: UserData) => this.dataSource = userData)
+            ).subscribe();
+
+        }
+
     }
 
-    navigateToUser(id) {
-        this.route.navigate(['./' + id], {relativeTo: this.activatedRoute});
+    navigateToUser(id: string) {
+        this.router.navigate(['./' + id], {relativeTo: this.activatedRoute});
+    }
+
+    findByUsername(username: string) {
+        this.userService.paginateByUserName(0, 10, username).pipe(
+            map((userdata: UserData) => this.dataSource = userdata)
+        ).subscribe();
     }
 
 }

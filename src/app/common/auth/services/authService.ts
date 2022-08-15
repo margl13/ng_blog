@@ -31,11 +31,7 @@ export class AuthService {
         localStorage.removeItem(AUTH_TOKEN);
     }
 
-    register(user: UserRegister) {
-        return this.http.post<any>('/api/users/', user).pipe(
-            map(user => user)
-        )
-    }
+
 
     isAuthenticated(): boolean {
         const token = localStorage.getItem(AUTH_TOKEN);
@@ -49,13 +45,13 @@ export class AuthService {
         }
     }
 
-    getUserId(): Observable<any> {
+    getIdOfUser(): Observable<any> {
         return of(localStorage.getItem(AUTH_TOKEN)).pipe(
-            tap((jwt) => console.log(jwt)),
             switchMap((jwt: any) => of(this.jwtHelper.decodeToken(jwt)).pipe(
+                    tap((jwt) => console.log(jwt)),
                 map((jwt: any) => jwt.user.id)
-            ))
-        )
+            )
+            ));
     }
 }
 
