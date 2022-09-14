@@ -16,7 +16,7 @@ export class AppComponent {
     }
 
     navigateTo(value: any) {
-       this.router.navigate(['../', value]);
+        this.router.navigate(['../', value]);
     }
 
     logout() {

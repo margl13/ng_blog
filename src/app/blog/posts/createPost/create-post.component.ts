@@ -7,8 +7,8 @@ import * as _ from "lodash";
 import {FormBuilder, FormGroup, NgForm, Validators} from "@angular/forms";
 import {PostDto} from "../dataModel/PostDto";
 import {Observable, of} from "rxjs";
-import {catchError, finalize, map, tap} from "rxjs/operators";
-import {Router} from "@angular/router";
+import {catchError, finalize, first, map, tap} from "rxjs/operators";
+import {ActivatedRoute, Router} from "@angular/router";
 import {HttpErrorResponse, HttpEventType} from "@angular/common/http";
 
 
@@ -20,15 +20,11 @@ export interface File {
 
 @Component({
     selector: 'app-create-post-dialog',
-    templateUrl: './create-post-dialog-component.html',
-    styleUrls: ['./create-post-dialog-component.scss']
+    templateUrl: './create-post.component.html',
+    styleUrls: ['./create-post.component.scss']
 })
 
-export class CreatePostDialogComponent implements OnInit {
-
-    public postModel: CreatePostDto | EditPostDto = {} as CreatePostDto;
-    public isEditing = false;
-    public isLoading = false;
+export class CreatePostComponent implements OnInit {
 
     @ViewChild("fileUpload", {static: false}) fileUpload!: ElementRef;
 
@@ -41,11 +37,11 @@ export class CreatePostDialogComponent implements OnInit {
 
     form!: FormGroup;
 
-    constructor(private dialogRef: MatDialogRef<CreatePostDialogComponent>,
-                @Inject(MAT_DIALOG_DATA) public data: { editPostDto: EditPostDto },
+    constructor(
                 private postsService: PostsService,
                 private formBuilder: FormBuilder,
-                private router: Router) {
+                private router: Router
+    ) {
     }
 
     ngOnInit(): void {
@@ -54,31 +50,19 @@ export class CreatePostDialogComponent implements OnInit {
             title: ['', [Validators.required]],
             subTitle: ['', [Validators.required]],
             imageUrl: ['', [Validators.required]],
+            slug: [{value: null, disable: true}],
             content: ['', [Validators.required]]
         });
-        this.isEditing = !!_.get(this.data, 'editPostDto');
-        if (this.isEditing) {
-            this.postModel = _.clone(this.data.editPostDto);
-        }
     }
 
 
     post() {
-        this.isLoading = true;
-        this.handleAfterSubmit(
-            this.isEditing ?
-                this.postsService.edit(this.form.getRawValue()) :
-                this.postsService.create(this.form.getRawValue())
-        );
+         this.postsService.create(this.form.getRawValue()).pipe(
+             tap(() => this.router.navigate(['../']))
+         ).subscribe();
     }
 
-    private handleAfterSubmit(observable: Observable<PostDto>) {
-        return observable
-            .pipe(finalize(() => this.isLoading = false))
-            .subscribe((response) => {
-                this.dialogRef.close(response);
-            });
-    }
+
 
     onClick() {
         const fileInput = this.fileUpload.nativeElement;

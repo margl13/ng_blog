@@ -45,7 +45,7 @@ export class AuthService {
         }
     }
 
-    getIdOfUser(): Observable<any> {
+    getIdOfUser(): Observable<number> {
         return of(localStorage.getItem(AUTH_TOKEN)).pipe(
             switchMap((jwt: any) => of(this.jwtHelper.decodeToken(jwt)).pipe(
                     tap((jwt) => console.log(jwt)),

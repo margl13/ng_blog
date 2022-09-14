@@ -13,8 +13,8 @@ import {ActivatedRoute, Router} from "@angular/router";
 
 export class UsersComponent implements OnInit {
 
-    value: string = null as any;
-    dataSource: UserData = null as any;
+    value!: string;
+    dataSource!: UserData;
     pageEvent!: PageEvent;
     displayedColumns: string[] = ['id', 'username', 'profileImage', 'email', 'role'];
 

@@ -12,6 +12,7 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {MatSelectModule} from "@angular/material/select";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatDividerModule} from "@angular/material/divider";
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import {MatToolbarModule} from "@angular/material/toolbar";
         MatSelectModule,
         MatPaginatorModule,
         MatToolbarModule,
+        MatDividerModule
 
     ],
     exports: [
@@ -44,7 +46,8 @@ import {MatToolbarModule} from "@angular/material/toolbar";
         MatButtonModule,
         MatSelectModule,
         MatPaginatorModule,
-        MatToolbarModule
+        MatToolbarModule,
+        MatDividerModule
     ],
     declarations: [],
     providers: [],

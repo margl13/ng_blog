@@ -41,8 +41,8 @@ export class UpdateUserComponent implements OnInit {
     ngOnInit(): void {
         this.form = this.formBuilder.group({
             id: [{value: null, disabled: true}, [Validators.required]],
-            username: [null, [Validators.required]],
-            profileImage: [null]
+            username: ['', [Validators.required]],
+            profileImage: ['', [Validators.required]]
         });
 
         this.authService.getIdOfUser().pipe(
@@ -61,7 +61,7 @@ export class UpdateUserComponent implements OnInit {
     onClick() {
         const fileInput = this.fileUpload.nativeElement;
         fileInput.click();
-        fileInput.onChange = () => {
+        fileInput.onchange = () => {
             this.file = {
                 data: fileInput.files[0],
                 inProgress: false,
@@ -89,15 +89,13 @@ export class UpdateUserComponent implements OnInit {
             }),
             catchError((error: HttpErrorResponse) => {
                 this.file.inProgress = false;
-                return of('Upload filed');
+                return of('Upload failed');
             })).subscribe((event: any) => {
-            if (typeof (event) === 'object') {
-                console.log(event.body);
-                this.form.patchValue({profileImage: event.body.profileImage});
+            if(typeof (event) === 'object') {
+                this.form.patchValue({profileImage: event.body.filename});
             }
         })
     }
-
 
     update() {
        this.usersService.updateOne(this.form.getRawValue()) .subscribe();

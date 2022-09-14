@@ -5,8 +5,9 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CommonModule} from "@angular/common";
 import {PostsService} from "./services/posts.service";
 import {SinglePostModule} from "./single-post/SinglePostModule";
-import {CreatePostDialogComponent} from "./dialogs/create-post-dialog-component";
-import {MatToolbarModule} from "@angular/material/toolbar";
+import {CreatePostComponent} from "./createPost/create-post.component";
+import {UpdatePostModule} from "./update-post/UpdatePostModule";
+
 
 
 @NgModule({
@@ -17,12 +18,13 @@ import {MatToolbarModule} from "@angular/material/toolbar";
         ReactiveFormsModule,
         CommonModule,
         SinglePostModule,
+        UpdatePostModule
     ],
     exports: [
         PostListModule
     ],
-    declarations: [CreatePostDialogComponent],
-    entryComponents: [CreatePostDialogComponent],
+    declarations: [CreatePostComponent],
+    entryComponents: [CreatePostComponent],
     providers: [
     PostsService
     ],

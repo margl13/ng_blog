@@ -1,9 +1,12 @@
 import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {HttpClient, HttpParams} from "@angular/common/http";
+import {Observable, throwError} from "rxjs";
 import {PostDto} from "../dataModel/PostDto";
 import {CreatePostDto} from "../dataModel/CreatePostDto";
 import {EditPostDto} from "../dataModel/EditPostDto";
+import {UserData} from "../../../user/dataModel/UserData";
+import {catchError, map, tap} from "rxjs/operators";
+import {PostData} from "../dataModel/PostData";
 
 @Injectable({
     providedIn: "root"
@@ -13,8 +16,24 @@ export class PostsService {
     constructor(private http: HttpClient) {
     }
 
-    public findAll(): Observable<PostDto[]> {
-        return this.http.get('/api/posts/') as Observable<PostDto[]>;
+    findAll(page: number, limit: number): Observable<any> {
+        let params = new HttpParams();
+
+        params = params.append('page', String(page));
+        params = params.append('limit', String(limit));
+
+        return this.http.get<PostData>('/api/posts', {params}).pipe(
+            tap((a => console.log(a)))
+        );
+    }
+
+    findByUserId(userId: number, page: number, limit: number): Observable<PostData> {
+        let params = new HttpParams();
+
+        params = params.append('page', String(page));
+        params = params.append('limit', String(limit));
+
+        return this.http.get<PostData>('/api/posts/user/' + String(userId), {params});
     }
 
     findOnePost(id: number): Observable<PostDto>{
@@ -22,7 +41,7 @@ export class PostsService {
     }
 
     public edit(editPostDto: EditPostDto): Observable<PostDto> {
-        return this.http.put('/api/posts/' + editPostDto.id, editPostDto) as Observable<PostDto>;
+        return this.http.put<PostDto>('/api/posts/' + editPostDto.id, editPostDto) as Observable<PostDto>;
     }
 
     public delete(postId: number): Observable<any> {

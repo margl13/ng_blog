@@ -18,12 +18,13 @@ import {JwtInterceptor} from "./common/interceptors/jwt.interceptor";
 import { HomeComponent } from './components/home/home.component';
 import { SinglePostComponent } from './blog/posts/single-post/single-post.component';
 import {SinglePostModule} from "./blog/posts/single-post/SinglePostModule";
+import { UpdatePostComponent } from './blog/posts/update-post/update-post.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
   ],
     imports: [
         BrowserModule,

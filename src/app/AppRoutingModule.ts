@@ -8,6 +8,8 @@ import {UpdateUserComponent} from "./user/update-user/update-user.component";
 import {AuthGuard} from "./common/guards/auth-guard";
 import {HomeComponent} from "./components/home/home.component";
 import {SinglePostComponent} from "./blog/posts/single-post/single-post.component";
+import {CreatePostComponent} from "./blog/posts/createPost/create-post.component";
+import {UpdatePostComponent} from "./blog/posts/update-post/update-post.component";
 
 const routes: Routes = [
     {
@@ -53,6 +55,15 @@ const routes: Routes = [
         path: '',
         redirectTo: '/home',
         pathMatch: 'full'
+    },
+    {
+        path: 'create-post',
+        component: CreatePostComponent
+    },
+    {
+        path: 'update-post/:id',
+        component: UpdatePostComponent,
+        canActivate: [AuthGuard]
     }
 
     ];

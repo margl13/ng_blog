@@ -1,12 +1,11 @@
-<h1> New Post </h1>
-<form [formGroup]="form">
+<form [formGroup]="form" (ngSubmit)="update()">
     <div>
         <mat-card class="container">
 
             <div style="width: 80%;">
                 <mat-card>
                     <mat-card-content>
-                        <img *ngIf="form.get('imageUrl').value" src="/api/posts/image/{{form.get('imageUrl').value}}">
+                        <img *ngIf="form.get('imageUrl').value" src="/api/posts/image/{{form.get('imageUrl').value}}" class="update-image">
                         <ul>
                             <li>
                                 <mat-progress-bar [value]="file.progress"></mat-progress-bar>
@@ -55,23 +54,19 @@
                 </mat-form-field>
             </div>
 
-            <div mat-dialog-actions>
+
             <button mat-flat-button
                     type="submit"
-                    (click)="post()"
                     [disabled]="!form.valid"
                     color="primary">
-                Add Post
+                Edit Post
             </button>
-                <button mat-button mat-dialog-close>Close</button>
-            </div>
 
 
-            <mat-dialog-actions *ngIf="isLoading">
-                <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-            </mat-dialog-actions>
 
         </mat-card>
     </div>
 
 </form>
+
+

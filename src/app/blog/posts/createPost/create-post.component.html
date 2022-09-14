@@ -1,0 +1,72 @@
+<h1> New Post </h1>
+<form [formGroup]="form">
+    <div>
+        <mat-card class="container">
+
+            <div style="width: 80%;">
+                <mat-card>
+                    <mat-card-content>
+                        <img *ngIf="form.get('imageUrl').value" src="/api/posts/image/{{form.get('imageUrl').value}}">
+                        <ul>
+                            <li>
+                                <mat-progress-bar [value]="file.progress"></mat-progress-bar>
+                            </li>
+                        </ul>
+                        <mat-card-actions>
+                            <button mat-button color="warn" (click)="onClick()">
+                                <mat-icon>cloud_upload</mat-icon>
+                                <small> Upload Image </small>
+                            </button>
+                        </mat-card-actions>
+                    </mat-card-content>
+                </mat-card>
+                <input type="file" #fileUpload id="fileUpload" name="fileUpload" accept="image/*"
+                       style="display: none">
+            </div>
+
+            <div class="container" style="width:80%">
+
+                <mat-form-field>
+                    <input matInput
+                           placeholder="Id"
+                           formControlName="id">
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input type="text"
+                           matInput
+                           formControlName="title"
+                           placeholder="Title">
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input type="text"
+                           matInput
+                           formControlName="subTitle"
+                           placeholder="subTitle">
+                </mat-form-field>
+
+
+                <mat-form-field>
+                    <textarea matInput
+                              formControlName="content"
+                              placeholder="Content">
+                    </textarea>
+                </mat-form-field>
+            </div>
+
+
+                <button mat-flat-button
+                        type="submit"
+                        (click)="post()"
+                        [disabled]="!form.valid"
+                        color="primary">
+                    Add Post
+                </button>
+
+
+
+        </mat-card>
+    </div>
+
+</form>

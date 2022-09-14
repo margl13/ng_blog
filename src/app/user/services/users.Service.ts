@@ -19,13 +19,13 @@ export class UsersService {
         )
     }
 
-    findAll(page: number, size: number): Observable<any> {
+    findAll(page: number, size: number): Observable<UserData> {
         let params = new HttpParams();
 
         params = params.append('page', String(page));
         params = params.append('limit', String(size));
 
-        return this.http.get('/api/users', {params}).pipe(
+        return this.http.get<UserData>('/api/users', {params}).pipe(
             map((userData: any) => userData),
             catchError(err => throwError(err))
         )
@@ -60,4 +60,5 @@ export class UsersService {
             observe: 'events'
         });
     }
+
 }

@@ -1,6 +1,6 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
 import {BehaviorSubject, Observable, Subscription} from "rxjs";
-import {finalize} from "rxjs/operators";
+import {finalize, map} from "rxjs/operators";
 import * as _ from "lodash";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatDialog} from "@angular/material/dialog";
@@ -8,7 +8,10 @@ import {PostDto} from "../dataModel/PostDto";
 import {PostsService} from "../services/posts.service";
 import {EditPostDto} from "../dataModel/EditPostDto";
 import {ConfirmationDialogComponent} from "../../dialogs/confirmationDialogComponent";
-import {CreatePostDialogComponent} from "../dialogs/create-post-dialog-component";
+import {CreatePostComponent} from "../createPost/create-post.component";
+import {PostData} from "../dataModel/PostData";
+import {PageEvent} from "@angular/material/paginator";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -17,83 +20,36 @@ import {CreatePostDialogComponent} from "../dialogs/create-post-dialog-component
     styleUrls: ['post-list.component.scss']
 })
 
-export class PostListComponent implements OnInit {
-    public isLoading = false;
-    public displayedColumns: string[] = ['id', 'title', 'subTitle', 'imageUrl', 'author', 'view post', 'edit post', 'action', 'add to favorite'];
+export class PostListComponent {
 
-    private postListSubject: BehaviorSubject<PostDto[]> = new BehaviorSubject<PostDto[]>([])
+    @Input() posts!: PostData;
+    @Output() paginate: EventEmitter<PageEvent> = new EventEmitter<PageEvent>();
+
+    public isLoading = false;
+    public displayedColumns: string[] = ['id', 'title', 'subTitle', 'imageUrl', 'author'];
+
+    pageEvent!: PageEvent;
+    value!: string;
 
     constructor(private postsService: PostsService,
                 private snackBar: MatSnackBar,
-                private matDialog: MatDialog) {
+                private matDialog: MatDialog,
+                private router: Router) {
     }
 
-    ngOnInit() {
-        this.isLoading = true;
-        this.postsService.findAll()
-            .pipe(finalize(() => this.isLoading = false))
-            .subscribe((postListItems) => this.postListSubject.next(postListItems));
+    onPaginateChange(event: PageEvent) {
+        event.pageIndex = event.pageIndex + 1;
+        this.paginate.emit(event);
     }
 
-    public getPostList(): Observable<PostDto[]> {
-        return this.postListSubject.asObservable();
+    navigateTo(value: any) {
+        this.router.navigate(['../', value]);
     }
 
-    public editPost(editPost: EditPostDto) {
-        const ref = this.matDialog.open(CreatePostDialogComponent, {
-            width: '600px',
-            data: {editPostDto: editPost}
-        });
-
-        ref.afterClosed().subscribe((editedPost: PostDto) => {
-            if (editedPost) {
-                const list = this.postListSubject.getValue();
-                const postIndex = _.findIndex(list, post => post.id === editedPost.id);
-                list[postIndex] = editedPost;
-
-                this.postListSubject.next(_.cloneDeep(list));
-            }
-        });
+    navigate(id: string) {
+        this.router.navigateByUrl('posts/' + id)
     }
-
-    public deletePost(postDto: PostDto) {
-        const ref = this.matDialog.open(ConfirmationDialogComponent);
-
-        ref.afterClosed().subscribe((canContinue) => {
-            if (canContinue) {
-                this.isLoading = true;
-                this.postsService.delete(postDto.id)
-                    .pipe(finalize(() => this.isLoading = false))
-                    .subscribe(() => {
-                        const list = this.postListSubject.getValue();
-                        _.remove(list, post => post.id === postDto.id);
-                        this.postListSubject.next(_.cloneDeep(list));
-
-                        this.snackBar.open(`Post ${postDto.title} has been removed`, 'delete', {
-                            duration: 2500,
-                        });
-                    });
-            }
-        });
-    }
-
-    public createPost() {
-        const ref = this.matDialog.open(CreatePostDialogComponent, {
-            width: '600px',
-        });
-
-        ref.afterClosed().subscribe((newPost: PostDto) => {
-            if (newPost) {
-                const list = this.postListSubject.getValue();
-                list.push(newPost);
-                this.postListSubject.next(_.cloneDeep(list));
-
-                this.snackBar.open(`Post ${newPost.title} has been created`, 'create' , {
-                    duration: 2500,
-                });
-            }
-        });
-    }
-
 
 }
+
+
